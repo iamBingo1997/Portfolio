@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Nocturnal theme - light mode with dark accents */
+    --background: 240 10% 95%;
+    --foreground: 240 15% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 15% 15%;
+
+    --primary: 240 70% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 280 60% 65%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 240 10% 90%;
+    --muted-foreground: 240 10% 40%;
+
+    --accent: 190 95% 55%;
+    --accent-foreground: 240 15% 10%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 10% 85%;
+    --input: 240 10% 85%;
+    --ring: 240 70% 60%;
+
+    --radius: 0.75rem;
+
+    /* Custom nocturnal tokens */
+    --night-sky: 240 50% 12%;
+    --midnight: 245 45% 8%;
+    --deep-space: 250 55% 6%;
+    --cosmic-purple: 280 60% 65%;
+    --stellar-cyan: 190 95% 55%;
+    --moonlight: 240 20% 85%;
+    --stardust: 240 15% 75%;
+
+    /* Gradients */
+    --gradient-night: linear-gradient(135deg, hsl(245 45% 8%) 0%, hsl(240 50% 12%) 50%, hsl(280 40% 15%) 100%);
+    --gradient-cosmic: linear-gradient(135deg, hsl(280 60% 65%) 0%, hsl(240 70% 60%) 100%);
+    --gradient-aurora: linear-gradient(90deg, hsl(280 60% 65%) 0%, hsl(190 95% 55%) 100%);
+  }
+
+  .dark {
+    /* Nocturnal theme - dark mode (primary) */
+    --background: 245 45% 8%;
+    --foreground: 240 20% 92%;
+
+    --card: 240 50% 12%;
+    --card-foreground: 240 20% 92%;
+
+    --popover: 240 50% 10%;
+    --popover-foreground: 240 20% 92%;
+
+    --primary: 190 95% 55%;
+    --primary-foreground: 245 45% 8%;
+
+    --secondary: 280 60% 65%;
+    --secondary-foreground: 245 45% 8%;
+
+    --muted: 240 40% 18%;
+    --muted-foreground: 240 15% 65%;
+
+    --accent: 280 60% 65%;
+    --accent-foreground: 245 45% 8%;
+
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 240 20% 92%;
+
+    --border: 240 40% 18%;
+    --input: 240 40% 18%;
+    --ring: 190 95% 55%;
+
+    /* Custom nocturnal tokens for dark mode */
+    --night-sky: 240 50% 12%;
+    --midnight: 245 45% 8%;
+    --deep-space: 250 55% 6%;
+    --cosmic-purple: 280 60% 65%;
+    --stellar-cyan: 190 95% 55%;
+    --moonlight: 240 20% 85%;
+    --stardust: 240 15% 75%;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
+  }
+
+  .night-glow {
+    text-shadow: 0 0 20px hsl(var(--stellar-cyan) / 0.5);
+  }
+
+  .card-glow {
+    box-shadow: 0 0 30px -10px hsl(var(--cosmic-purple) / 0.3);
+  }
+
+  .smooth-transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
