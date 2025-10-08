@@ -1,8 +1,10 @@
 import { useMemo } from "react";
+import { useTheme } from "@/components/ThemeProvider";
 
 type Star = { top: number; left: number; size: number; duration: number; delay: number; opacity: number };
 
 export const StarsBackground = ({ count = 140 }: { count?: number }) => {
+  const { theme } = useTheme();
   const stars = useMemo<Star[]>(
     () =>
       Array.from({ length: count }, () => ({
@@ -17,20 +19,23 @@ export const StarsBackground = ({ count = 140 }: { count?: number }) => {
   );
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none dark:block hidden">
+    <div className="fixed inset-0 z-0 pointer-events-none block">
       {stars.map((s, i) => (
         <div
           key={i}
-          className="absolute rounded-full bg-white/90 animate-twinkle"
+          className="absolute rounded-full animate-twinkle"
           style={{
             top: `${s.top}%`,
             left: `${s.left}%`,
             width: `${s.size}px`,
             height: `${s.size}px`,
-            opacity: s.opacity,
+            // Slightly lower opacity in light mode to keep subtle
+            opacity: theme === "dark" ? s.opacity : Math.min(0.12, s.opacity * 0.7),
+            // Adjust color per theme for contrast harmony
+            backgroundColor: theme === "dark" ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.7)",
             animationDuration: `${s.duration}s`,
             animationDelay: `${s.delay}s`,
-            filter: "blur(0.6px)",
+            filter: theme === "dark" ? "blur(0.6px)" : "blur(0.4px)",
           }}
         />
       ))}
