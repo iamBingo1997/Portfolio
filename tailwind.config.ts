@@ -95,6 +95,11 @@ export default {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.6" },
         },
+        // Twinkle: true on/off blink with slight randomness support via inline styles
+        twinkle: {
+          "0%, 100%": { opacity: "0" },
+          "50%": { opacity: "1" },
+        },
         "float": {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-10px)" },
@@ -107,6 +112,7 @@ export default {
         "fade-in-up": "fade-in-up 0.8s ease-out",
         "slide-in": "slide-in 0.5s ease-out",
         "glow-pulse": "glow-pulse 2s ease-in-out infinite",
+        twinkle: "twinkle 1.8s steps(2, end) infinite",
         "float": "float 3s ease-in-out infinite",
       },
     },
