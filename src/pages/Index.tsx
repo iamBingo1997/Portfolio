@@ -323,7 +323,7 @@ const Index = () => {
                       <div className="p-3 rounded-lg bg-primary/10"><Mail className="h-6 w-6 text-primary" /></div>
                       <div>
                         <h3 className="font-semibold text-foreground mb-1">Email</h3>
-                        <a href="mailto:hello@designer.com" className="text-muted-foreground hover:text-primary smooth-transition">hello@designer.com</a>
+                        <a href="mailto:amirabbas.thri@gmail.com" className="text-muted-foreground hover:text-primary smooth-transition">amirabbas.thri@gmail.com</a>
                       </div>
                     </div>
                   </CardContent>

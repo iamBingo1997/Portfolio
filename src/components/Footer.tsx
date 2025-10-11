@@ -60,10 +60,10 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold text-lg mb-4 text-foreground">Get in Touch</h3>
             <a
-              href="mailto:hello@designer.com"
+              href="mailto:amirabbas.thri@gmail.com"
               className="text-muted-foreground hover:text-primary smooth-transition"
             >
-              hello@designer.com
+              amirabbas.thri@gmail.com
             </a>
           </div>
         </div>
