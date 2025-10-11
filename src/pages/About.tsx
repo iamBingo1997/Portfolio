@@ -33,11 +33,8 @@ const About = () => {
       
       <main className="pt-24 pb-20 px-6">
         <div className="container mx-auto max-w-5xl">
-          {/* Header */}
           <div className="mb-16 animate-fade-in-up">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              About Me
-            </h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">About Me</h1>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
               <div className="md:col-span-2 space-y-4">
                 <p className="text-lg text-foreground/90 leading-relaxed">
@@ -60,7 +57,7 @@ const About = () => {
               <div className="flex justify-center md:justify-end">
                 <div className="w-48 h-48 rounded-2xl bg-gradient-cosmic overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop"
+                    src={`${import.meta.env.BASE_URL}photo.jpg`}
                     alt="Profile"
                     className="w-full h-full object-cover"
                   />

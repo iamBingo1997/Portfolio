@@ -237,7 +237,7 @@ const Index = () => {
                 <div className="flex justify-center md:justify-end">
                   <div className="w-48 h-48 rounded-2xl bg-gradient-cosmic overflow-hidden">
                     <img
-                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop"
+                      src={`${import.meta.env.BASE_URL}photo.jpg`}
                       alt="Profile"
                       className="w-full h-full object-cover"
                     />
