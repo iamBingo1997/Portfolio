@@ -111,6 +111,22 @@ All colors MUST be HSL.
   .smooth-transition {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
+
+  /* انتقال نرم پدینگ برای جلوگیری از برخورد ناگهانی به لبه‌ها هنگام مخفی شدن سایدناو */
+  .smooth-padding {
+    transition: padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* padding چپ تدریجی برای محتوای اصلی، وابسته به سایدناو */
+  .content-padding {
+    padding-left: 0;
+  }
+  @media (min-width: 768px) {
+    .content-padding {
+      padding-left: var(--content-pl, 0px);
+      transition: padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  }
 }
 
 @layer base {

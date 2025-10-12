@@ -11,9 +11,13 @@ import { ArrowRight, Sparkles, Download, CheckCircle, Mail, Linkedin, Github, Tw
 import { StarsBackground } from "@/components/StarsBackground";
 import { ProjectCard } from "@/components/ProjectCard";
 import { toast } from "sonner";
+import { SideScrollNav } from "@/components/SideScrollNav";
 
 const Index = () => {
   const location = useLocation();
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const [footerInView, setFooterInView] = useState(false);
+  const [footerRatio, setFooterRatio] = useState(0);
 
   useEffect(() => {
     const path = location.pathname;
@@ -25,6 +29,40 @@ const Index = () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [location.pathname]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY || document.documentElement.scrollTop || 0;
+      setHasScrolled(y > 8);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const footerEl = document.querySelector("footer");
+    if (!footerEl) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        setFooterInView(entry.isIntersecting);
+        setFooterRatio(entry.intersectionRatio || 0);
+      },
+      {
+        root: null,
+        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
+      },
+    );
+    observer.observe(footerEl);
+    return () => observer.disconnect();
+  }, []);
+
+  const fadeAmount = footerInView ? Math.max(0, 1 - Math.min(footerRatio, 0.95)) : 1;
+  // فعال بودن سایدناو بر اساس اسکرول
+  const sideActive = hasScrolled;
+  // padding چپ تدریجی بر اساس میزان نمایش سایدناو در مدیا md به بالا
+  const contentPaddingPx = sideActive ? Math.round(10 * 16 * fadeAmount) : 0; // md:pl-40 => 10rem => 160px
 
   const projects = useMemo(
     () => [
@@ -104,9 +142,13 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background dark:bg-gradient-night relative">
-      <Navigation />
+      <Navigation fadeOut={hasScrolled} />
+      <SideScrollNav visible={sideActive} fadeAmount={fadeAmount} />
       <StarsBackground />
-      <div className="relative z-10">
+      <div
+        className={"relative z-10 content-padding"}
+        style={{ ['--content-pl' as any]: `${contentPaddingPx}px` }}
+      >
         {/* Hero Section */}
         <section id="home" className="pt-32 pb-20 px-6 scroll-mt-24">
           <div className="container mx-auto max-w-5xl">

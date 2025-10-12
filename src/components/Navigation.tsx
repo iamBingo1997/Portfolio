@@ -4,7 +4,7 @@ import { Moon, Sun, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/ThemeProvider";
 
-export const Navigation = () => {
+export const Navigation = ({ fadeOut = false }: { fadeOut?: boolean }) => {
   const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
@@ -59,7 +59,11 @@ export const Navigation = () => {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border smooth-transition ${
+        fadeOut ? "opacity-0 -translate-y-2 pointer-events-none" : "opacity-100 translate-y-0"
+      }`}
+    >
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" onClick={handleHomeClick} className="text-xl font-semibold text-foreground hover:text-primary smooth-transition">
