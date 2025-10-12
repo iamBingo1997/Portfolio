@@ -23,6 +23,16 @@ export const Navigation = () => {
   const sectionFromPath = useMemo(() => stripSlash(location.pathname), [location.pathname]);
   const currentHighlight = activeSection || sectionFromPath;
 
+  // هندلر کلیک برای اسکرول به ابتدای صفحه/سکشن home
+  const handleHomeClick = () => {
+    const el = document.getElementById("home");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>("section[id]"));
     if (!sections.length) return;
@@ -52,10 +62,9 @@ export const Navigation = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="text-xl font-semibold text-foreground hover:text-primary smooth-transition">
+          <Link to="/" onClick={handleHomeClick} className="text-xl font-semibold text-foreground hover:text-primary smooth-transition">
             Amirabbas Taheri
           </Link>
-
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => {
@@ -65,6 +74,7 @@ export const Navigation = () => {
                 <Link
                   key={link.path}
                   to={link.path}
+                  onClick={link.path === "/" ? handleHomeClick : undefined}
                   className={`text-sm font-medium smooth-transition ${
                     active ? "text-primary" : "text-muted-foreground hover:text-foreground"
                   }`}
@@ -128,7 +138,10 @@ export const Navigation = () => {
                 <Link
                   key={link.path}
                   to={link.path}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    if (link.path === "/") handleHomeClick();
+                    setIsMenuOpen(false);
+                  }}
                   className={`block py-3 text-sm font-medium smooth-transition ${
                     active ? "text-primary" : "text-muted-foreground hover:text-foreground"
                   }`}

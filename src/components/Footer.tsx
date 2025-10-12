@@ -2,6 +2,14 @@ import { Link } from "react-router-dom";
 import { Linkedin, Github, Twitter } from "lucide-react";
 
 export const Footer = () => {
+  const handleHomeClick = () => {
+    const el = document.getElementById("home");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
   return (
     <footer className="border-t border-border bg-card/30 backdrop-blur-sm">
       <div className="container mx-auto px-6 py-12">
@@ -9,7 +17,7 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold text-lg mb-4 text-foreground">Navigation</h3>
             <div className="flex flex-col gap-2">
-              <Link to="/" className="text-muted-foreground hover:text-foreground smooth-transition">
+              <Link to="/" onClick={handleHomeClick} className="text-muted-foreground hover:text-foreground smooth-transition">
                 Home
               </Link>
               <Link to="/work" className="text-muted-foreground hover:text-foreground smooth-transition">
